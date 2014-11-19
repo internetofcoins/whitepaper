@@ -1,4 +1,3 @@
-
 Building LaTeX document
 
 	latexmk -pdf whitepaper.tex
@@ -6,3 +5,5 @@ Building LaTeX document
 Cleanup
 
 	latexmk -C whitepaper.tex
+
+Same in `protocol` directory.
