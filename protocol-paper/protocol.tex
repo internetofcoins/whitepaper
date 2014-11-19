@@ -1,0 +1,166 @@
+\documentclass[a4paper]{article}
+
+\usepackage{color}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+% \renewcommand{\baselinestretch}{.8}
+
+
+\newcommand{\hyb}[1]{\ensuremath{\mathtt{ HYB }_{#1}}}
+\newcommand{\TODO}{{\color{red}\texttt{TODO: }}}
+\newcommand{\IDEA}{{\color{blue}\texttt{IDEA: }}}
+\newcommand{\crypt}[1]{\ensuremath{ {\lbrace {#1} \rbrace} } }
+
+\begin{document}
+
+\begin{center}
+\url{http://internetofcoins.org/}
+\end{center}
+
+In this document we will try to rigorously formulate the problem and our proposed solutions. Crypto-analysis will follow later.
+
+Comments welcome.
+
+\section{Notation and setting}
+
+We are dealing with two block-chains, $X$ and $Y$, both of which:
+
+\begin{itemize}
+\item support multi-signature transactions,
+\item carry the hybrid asset \hyb.
+\end{itemize}
+
+To be specific on which block-chain a hybrid asset lives we write \hyb{X}.
+
+Our usual suspects are
+
+\begin{description}
+	\item[Alice] Offers to swap \hyb{Y} for \hyb{X}, she is called the \emph{allocator}.
+	
+	\item[Bob] has \hyb{Y} and wants \hyb{X}. He \emph{initiates} a transaction with Alice to swap his \hyb{Y} for her \hyb{X}.
+	
+	\item[Cipher] A trust-less third party that operates as an escrow service.
+\end{description}
+
+Given a value $x$ we write $\crypt{x}_K$ to denote $x$ encrypted with key $K$.
+
+We use $(K_a, PK_a)$ to denote a keypair $a$ consisting of
+$PK_a$, the public key of a pair $a$ and $K_a$, the private key.
+
+\section{Protocol}
+
+The protocol runs in ticks, each tick synchronized to the bitcoin blockchain (for instance).
+\IDEA somehow use the block header $H_i$ and $H_{i+1}$ in the protocol
+
+\subsection{Overview}
+
+Bob has \hyb{Y} and wants \hyb{X}.
+
+Bob finds an allocator on the network willing to swap his \hyb{Y} for \hyb{X}.
+Alice responds and they form a contract stating what is exchanged by whom:
+
+\[
+s = \langle B, A, Y, X \rangle
+\]
+
+\TODO contract should only be constructable with agreement from both Alice and Bob
+\IDEA $A$ responds with signed contract $s$, $B$ signs $s$ and sends it to $C$ which
+checks for signatures of $A$ and $B$.
+
+\subsection{Decentralized escrow}
+
+This contract is send to $C$ and we want $C$ to respond with:
+
+\begin{description}
+\item[first] Two addresses $\alpha$ and $\beta$ where \hyb{X} and \hyb{Y} should be send too
+\item[then] Once $\alpha$ and $\beta$ contain the funds, a pair of keys is released by $C$ that transfers ownership of $\alpha$ to Bob and $\beta$ to Alice.
+\item[alternatively] If either of $\alpha,\beta$ doesn't contain the required hybrid assets after some time, a pair of keys is released that gives Alice ownership of $\alpha$ again, same for bob, aborting the swap.
+\end{description}
+
+\TODO write down tick synchronization
+
+\subsection{Multisignature approach}
+
+\subsubsection{Phase 1: publish target addresses}
+
+Suppose we have $N$ nodes and let each node $n$ generate two key-pairs,
+one for each of the two addresses $\alpha, \beta$
+
+\[
+	(K_n^\alpha, PK_n^\alpha, K_n^\beta, PK_n^\beta)
+\]
+
+Each node keeps their $PK$ private and shares $K_n^\alpha$ and $K_n^\beta$.
+
+When all $N$ keys are received we can construct the target addresses $\alpha, \beta$.
+\[
+	\alpha \equiv \prod K_n^\alpha
+\]
+
+These addresses need to be public, because they are to be monitored by each node.
+
+\TODO would like the node to publish $\crypt{PK_n^*}_{K_A}$ at the same time. but we don't know before-hand if $*$ should be $\alpha$ or $\beta$.
+
+\IDEA somehow encode a decryption into the transactions, such that when we reach the next tick, just by looking at the transactions $A\to\alpha$ and $B\to\beta$, either $*=\alpha$ \emph{OR} $*=\beta$ can be decoded.
+
+\subsubsection{Release access keys}
+
+When monitoring the two addresses, at the next tick there are two situations:
+
+\begin{description}
+\item[Succes] $\Rightarrow$ publish $\langle \crypt{K_n^\beta}_{PK_A}, \crypt{K_\alpha}_{PK_B} \rangle$
+\item[Abort] $\Rightarrow$ publish $\langle \crypt{K_n^\alpha}_{PK_A}, \crypt{K_\beta}_{PK_B} \rangle$
+\end{description}
+
+Like before, when all $N$ keys are received we can construct the private keys and access the address $\alpha$ or $\beta$. First decode each $\crypt{K_n^\beta}_{PK_A}$ into $K_n^\beta$, then just combine
+
+\[
+	K_\alpha \equiv \prod K_n^\alpha
+\]
+
+\TODO how to ensure that both private keys in the tuple are valid?
+
+\subsection{Moderated non-multisig block-chain transaction}
+
+We imagine that Bob doesn't support multisig. Our allocator Alice then needs to be trusted. We will try to achieve this by having Alice do a deposit first to an address $\gamma$ and then have $C$ oversee the whole situation.
+
+If the transaction doesn't go as planned, the deposit is used as an insurance.
+
+
+\section{References}
+
+\begin{itemize}
+\item \url{https://github.com/vbuterin/pybitcointools}
+\item \url{http://safecurves.cr.yp.to/}
+
+\item Group-oriented (t, n) threshold digital signature scheme and digital multisignature
+L. Harn
+IEE Proceedings - Computers and Digital Techniques(1994),141(5):307
+\url{http://dx.doi.org/10.1049/ip-cdt:19941293}
+
+\item Wei-Hua He - "Weaknesses in some multisignature schemes for specified group of verifiers "
+\url{http://dx.doi.org/10.1016/S0020-0190(01)00317-9}
+
+\item Proxy Blind Multi-signature Scheme using
+ECC for handheld devices
+Jayaprakash Kar
+\url{http://eprint.iacr.org/2011/043.pdf}
+
+\item Digital multi-signature scheme based on the Elliptic Curve cryptosystem
+Tzer-Shyong Chen, Kuo-Hsuan Huang, Yu-Fang Chung
+\url{http://link.springer.com/article/10.1007/BF02944760}
+
+\item Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme; 
+Alexandra Boldyreva
+\url{http://link.springer.com/chapter/10.1007%2F3-540-36288-6_3}
+
+\item Mastering Bitcoin - Andreas M. Antonopoulos;
+\url{http://chimera.labs.oreilly.com/books/1234000001802/index.html}
+
+\end{itemize}
+
+
+
+\end{document}
