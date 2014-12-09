@@ -1,23 +1,32 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper,fullpack]{article}
 
 % Font used is Latin-Modern (version of computer modern)
 % http://www.gust.org.pl/projects/e-foundry/latin-modern
 \usepackage{lmodern}
-
 \usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+
 
 \title{Internet of Coins\\[6mm]
 \small{Hybrid Assets for Peer-to-Peer Inter-Blockchain Value Transfer}
 }
+
+\newcommand{\hyb}[1]{\ensuremath{\mathtt{ HYB }_{#1}}}
+\newcommand{\TODO}{{\color{red}\texttt{TODO: }}}
+\newcommand{\IDEA}{{\color{blue}\texttt{IDEA: }}}
+\newcommand{\crypt}[1]{\ensuremath{ {\lbrace {#1} \rbrace} } }
+
+\newcommand{\hybridd}{\texttt{hybridd}\, }
+\newcommand{\stormwind}{\texttt{STORMWIND}\, }
+\newcommand{\haystack}{\emph{Haystack}}
 
 \makeindex
 
 \begin{document}
 \maketitle
 
-\newcommand{\hybridd}{\texttt{hybridd}\, }
-\newcommand{\stormwind}{\texttt{STORMWIND}\, }
-\newcommand{\haystack}{\emph{Haystack}}
+
 
 
 \begin{abstract}
@@ -170,7 +179,7 @@ Alice responds and they form a contract stating what is exchanged by whom:
 s = \langle B, A, Y, X \rangle
 \]
 
-\subsubsubsection{Decentralized escrow}
+\subsubsection{Decentralized escrow}
 
 This contract is sent to $C$ and we want $C$ to respond with:
 
@@ -180,9 +189,9 @@ This contract is sent to $C$ and we want $C$ to respond with:
 \item[alternatively] If either of $\alpha,\beta$ doesn't contain the required hybrid assets after some time, a pair of keys is released that gives Alice ownership of $\alpha$ again, same for bob, aborting the swap.
 \end{description}
 
-\subsubsubsection{Multisignature approach}
+\subsubsection{Multisignature approach}
 
-\subsubsubsubsection{Publish target address}
+\subsubsection{Publish target address}
 
 Suppose we have $N$ nodes and let each node $n$ generate two key-pairs,
 one for each of the two addresses $\alpha, \beta$
@@ -200,7 +209,7 @@ When all $N$ keys are received we can construct the target addresses $\alpha, \b
 
 These addresses need to be public, because they are to be monitored by each node.
 
-\subsubsubsubsection{Release access keys}
+\subsubsection{Release access keys}
 
 When monitoring the two addresses, at the next tick there are two situations:
 
