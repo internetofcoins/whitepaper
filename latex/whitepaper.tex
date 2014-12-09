@@ -1,5 +1,11 @@
 \documentclass[a4paper]{article}
 
+% Font used is Latin-Modern (version of computer modern)
+% http://www.gust.org.pl/projects/e-foundry/latin-modern
+\usepackage{lmodern}
+
+\usepackage{graphicx}
+
 \title{Internet of Coins\\[6mm]
 \small{Hybrid Assets for Peer-to-Peer Inter-Blockchain Value Transfer}
 }
@@ -32,12 +38,16 @@ We define a hybrid asset as a blockchain-agnostic set of tokens\cite{coloredcoin
 
 Communication between exchanging peers goes through an anonymous swarm of nodes that act as an escrow for the network. The nodes in this group use \haystack cryptography to ensure impartial activity as a swarm or hive. Explained in simple terms haystack works as follows. Both the allocator of a transaction (Alice) and the initiator (Bob) receive public addresses from a swarm escrow (we will call this group Cipher). Cipher makes available a multitude of public keys created by each individual member of the swarm. These keys form multisignature transaction keys\cite{multisig} when combined. For a more detailed description of this mechanism, see section 10.
 
+\includegraphics[width=.9\textwidth]{images/1-way-transaction.pdf}
+
 
 \section{Meta Server}
 
 To be able to integrate technically incompatible value models and peer-to-peer blockchains, we must take the approach of creating a peer-to-peer meta server that loosely couples current digital value systems on a high level, and makes trusted third parties unnecessary. This meta-structure should provide hooks to which abstract concepts of digital value systems and blockchain technologies can be connected and integrated. Modular and open extensions facilitate the implementation of different kinds of hybrid value systems in pluggable modules to unify the overlapping functionalities of different blockchains and ledgerless systems.
 
 The meta-server networking daemon (hybridd) must use a concise and practical encrypted communications protocol and functions modularly  on top of existing anonymous routing networks such as, for example, TOR\cite{tor}, I2P\cite{i2p}, or GNUnet\cite{gnunet}, using their networks as a transport. This makes it more difficult to trivially identify individual node IP addresses, and makes NAT and firewall traversal easier. Peer ID's and their public keys are shared among peers as data in a distributed hash table\cite{dht}. Each PeerID is subject to a lease, and the entries of the peertable are intermittently verified by the participants in the network and timestamped.
+
+\includegraphics[width=.9\textwidth]{images/forumimg_hybridd.pdf}
 
 
 \section{Proof-of-Allocation}
@@ -46,6 +56,7 @@ To make sure peers are able to determine the viability of a transaction before i
 
 In the example you will notice there are four addresses holding the asset \stormwind, according to the POA table. Each node with access to NXT-AE (NXT) and CounterParty (XCP) blockchains is able to verify the allocated amount of assets specified in the table. By combining the information from a local database, a node can deduct that in this example the asset \stormwind has an allocation of 96,425 on the NXT blockchain and 49,500 on the XCP blockchain. The total proof-of-allocation amount would in this case be simply 145,925 units.
 
+\includegraphics[width=.9\textwidth]{images/forumimg_valuetokens.pdf}
 
 \section{Network}
 
