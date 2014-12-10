@@ -1,4 +1,4 @@
-\documentclass[a4paper,fullpack]{article}
+\documentclass[10pt, a4paper]{article}
 
 % Font used is Latin-Modern (version of computer modern)
 % http://www.gust.org.pl/projects/e-foundry/latin-modern
@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{hyperref}
-
+\usepackage{fullpage}
 
 \title{Internet of Coins\\[6mm]
 \small{Hybrid Assets for Peer-to-Peer Inter-Blockchain Value Transfer}
@@ -36,7 +36,22 @@
 
 \section{Introduction}
 
-Since the inception of Bitcoin, we have seen the rise of many digital cash descendants that either imitate or replicate the peer-to-peer version of electronic cash that Bitcoin was designed to be. Besides blockchain technology, decentralized asset exchanges\cite{counterparty} have been built to facilitate the issuing of virtual assets. Ledgerless \cite{opentransactions} systems have also been development, even before Bitcoin. While the existing solutions may function as intended, exchanges in value between these systems and blockchains is most often mediated through trusted third parties. This re-introduces the inherent weaknesses of the traditional trust based financial models into the realm of peer-to-peer digital currencies. In many cases this is no direct threat to the usage and trade of these currencies. Yet at the same time the different implementations of digital cash remain isolated from eachother, other than their exchange value relative to the Bitcoin. This exposes these currencies to price manipulation strategies that have the potential to drain value from these markets. \cite{panture}
+Since the inception of Bitcoin, we have seen the rise of many digital
+cash descendants that either imitate or replicate the peer-to-peer
+version of electronic cash that Bitcoin was designed to be. Besides
+blockchain technology, decentralized asset exchanges\cite{counterparty}
+have been built to facilitate the issuing of virtual assets. Ledgerless
+\cite{opentransactions} systems have also been development, even before
+Bitcoin. While the existing solutions may function as intended,
+exchanges in value between these systems and blockchains is most often
+mediated through trusted third parties. This re-introduces the inherent
+weaknesses of the traditional trust based financial models into the
+realm of peer-to-peer digital currencies. In many cases this is no
+direct threat to the usage and trade of these currencies. Yet at the
+same time the different implementations of digital cash remain isolated
+from eachother, other than their exchange value relative to the Bitcoin.
+This exposes these currencies to price manipulation strategies that have
+the potential to drain value from these markets \cite{panture}.
 
 What is needed is a hybrid asset and transfer system utilizing a modular and standardized peer-to-peer platform, to replace the trust model. A loosely coupled system\cite{EDA} allowing any two willing parties to transact assets cross-blockchain with each other, without the need for a trusted third party. Transaction methods that have no systemic boundaries and can operate cross-blockchain and inter-systemic, and may thus tie different value systems together. Through hybrid assets, loosely coupled financial systems create a cryptosphere that is immune to MITM (man-in-the-middle) intermediary control by trusted parties and stabilizes crypto-economies by enabling the value of smaller markets to be transferred into hybrid assets in the event of network destabilization. In this paper, we propose a solution to the digital economy diaspora using a peer-to-peer, distributed, inter-systemic and inter-blockchain exchange server to mediate the transfer of value between digital currency systems.
 
@@ -65,7 +80,7 @@ To make sure peers are able to determine the viability of a transaction before i
 
 In the example you will notice there are four addresses holding the asset \stormwind, according to the POA table. Each node with access to NXT-AE (NXT) and CounterParty (XCP) blockchains is able to verify the allocated amount of assets specified in the table. By combining the information from a local database, a node can deduct that in this example the asset \stormwind has an allocation of 96,425 on the NXT blockchain and 49,500 on the XCP blockchain. The total proof-of-allocation amount would in this case be simply 145,925 units.
 
-\includegraphics[width=.9\textwidth]{images/forumimg_valuetokens.pdf}
+\includegraphics[width=.5\textwidth]{images/forumimg_valuetokens.pdf}
 
 \section{Network}
 
@@ -245,7 +260,7 @@ By using multisignature transactions as a cryptographically secure method, advan
 
 \section{References}
 
-\bibliography{internetofcoins}{}
 \bibliographystyle{plain}
+\bibliography{internetofcoins}{}
 
 \end{document}
