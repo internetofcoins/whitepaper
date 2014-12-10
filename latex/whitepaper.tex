@@ -159,89 +159,89 @@ We are currently doing further research into the security of this method of exch
 
 The anonymous third party has no influence on the value of the exchange being done between the two exchanging parties, except for verifying, and releasing the transactions of both peers. In case of failure (a node member of Cipher drops offline) or a timeout, both Alice and Bob receive any necessary keys from failover peers, as the swarm employs deduplication to ensure the haystack transaction can be completed.
 
-\subsection{Notation}
-
-\subsubsection{Setting}
-
-We are dealing with two block-chains, $X$ and $Y$, both of which:
-
-\begin{itemize}
-\item support multi-signature transactions
-\item carry the hybrid asset
-\end{itemize}
-
-To be specific on which block-chain a hybrid asset lives we write \hyb{X}.
-
-Our usual suspects are
-
-\begin{description}
-	\item[Alice] Offers to swap \hyb{Y} for \hyb{X}, she is called the \emph{allocator}.
-	
-	\item[Bob] has \hyb{Y} and wants \hyb{X}. He \emph{initiates} a transaction with Alice to swap his \hyb{Y} for her \hyb{X}.
-	
-	\item[Cipher] A trust-less third party that operates as an escrow service.
-\end{description}
-
-Given a value $x$ we write $\crypt{x}_K$ to denote $x$ encrypted with key $K$.
-
-We use $(K_a, PK_a)$ to denote a keypair $a$ consisting of
-$PK_a$, the public key of a pair $a$ and $K_a$, the private key.
-
-\subsubsection{Protocol}
-
-Bob has \hyb{Y} and wants \hyb{X}.
-
-Bob finds an allocator on the network willing to swap his \hyb{Y} for \hyb{X}.
-Alice responds and they form a contract stating what is exchanged by whom:
-
-\[
-s = \langle B, A, Y, X \rangle
-\]
-
-\subsubsection{Decentralized escrow}
-
-This contract is sent to $C$ and we want $C$ to respond with:
-
-\begin{description}
-\item[first] Two addresses $\alpha$ and $\beta$ where \hyb{X} and \hyb{Y} should be send too
-\item[then] Once $\alpha$ and $\beta$ contain the funds, a pair of keys is released by $C$ that transfers ownership of $\alpha$ to Bob and $\beta$ to Alice.
-\item[alternatively] If either of $\alpha,\beta$ doesn't contain the required hybrid assets after some time, a pair of keys is released that gives Alice ownership of $\alpha$ again, same for bob, aborting the swap.
-\end{description}
-
-\subsubsection{Multisignature approach}
-
-\subsubsection{Publish target address}
-
-Suppose we have $N$ nodes and let each node $n$ generate two key-pairs,
-one for each of the two addresses $\alpha, \beta$
-
-\[
-	(K_n^\alpha, PK_n^\alpha, K_n^\beta, PK_n^\beta)
-\]
-
-Each node keeps their $PK$ private and shares $K_n^\alpha$ and $K_n^\beta$.
-
-When all $N$ keys are received we can construct the target addresses $\alpha, \beta$.
-\[
-	\alpha \equiv \prod K_n^\alpha
-\]
-
-These addresses need to be public, because they are to be monitored by each node.
-
-\subsubsection{Release access keys}
-
-When monitoring the two addresses, at the next tick there are two situations:
-
-\begin{description}
-\item[Succes] $\Rightarrow$ publish $\langle \crypt{K_n^\beta}_{PK_A}, \crypt{K_\alpha}_{PK_B} \rangle$
-\item[Abort] $\Rightarrow$ publish $\langle \crypt{K_n^\alpha}_{PK_A}, \crypt{K_\beta}_{PK_B} \rangle$
-\end{description}
-
-Like before, when all $N$ keys are received we can construct the private keys and access the address $\alpha$ or $\beta$. First decode each $\crypt{K_n^\beta}_{PK_A}$ into $K_n^\beta$, then just combine
-
-\[
-	K_\alpha \equiv \prod K_n^\alpha
-\]
+% \subsection{Notation}
+% 
+% \subsubsection{Setting}
+% 
+% We are dealing with two block-chains, $X$ and $Y$, both of which:
+% 
+% \begin{itemize}
+% \item support multi-signature transactions
+% \item carry the hybrid asset
+% \end{itemize}
+% 
+% To be specific on which block-chain a hybrid asset lives we write \hyb{X}.
+% 
+% Our usual suspects are
+% 
+% \begin{description}
+% 	\item[Alice] Offers to swap \hyb{Y} for \hyb{X}, she is called the \emph{allocator}.
+% 	
+% 	\item[Bob] has \hyb{Y} and wants \hyb{X}. He \emph{initiates} a transaction with Alice to swap his \hyb{Y} for her \hyb{X}.
+% 	
+% 	\item[Cipher] A trust-less third party that operates as an escrow service.
+% \end{description}
+% 
+% Given a value $x$ we write $\crypt{x}_K$ to denote $x$ encrypted with key $K$.
+% 
+% We use $(K_a, PK_a)$ to denote a keypair $a$ consisting of
+% $PK_a$, the public key of a pair $a$ and $K_a$, the private key.
+% 
+% \subsubsection{Protocol}
+% 
+% Bob has \hyb{Y} and wants \hyb{X}.
+% 
+% Bob finds an allocator on the network willing to swap his \hyb{Y} for \hyb{X}.
+% Alice responds and they form a contract stating what is exchanged by whom:
+% 
+% \[
+% s = \langle B, A, Y, X \rangle
+% \]
+% 
+% \subsubsection{Decentralized escrow}
+% 
+% This contract is sent to $C$ and we want $C$ to respond with:
+% 
+% \begin{description}
+% \item[first] Two addresses $\alpha$ and $\beta$ where \hyb{X} and \hyb{Y} should be send too
+% \item[then] Once $\alpha$ and $\beta$ contain the funds, a pair of keys is released by $C$ that transfers ownership of $\alpha$ to Bob and $\beta$ to Alice.
+% \item[alternatively] If either of $\alpha,\beta$ doesn't contain the required hybrid assets after some time, a pair of keys is released that gives Alice ownership of $\alpha$ again, same for bob, aborting the swap.
+% \end{description}
+% 
+% \subsubsection{Multisignature approach}
+% 
+% \subsubsection{Publish target address}
+% 
+% Suppose we have $N$ nodes and let each node $n$ generate two key-pairs,
+% one for each of the two addresses $\alpha, \beta$
+% 
+% \[
+% 	(K_n^\alpha, PK_n^\alpha, K_n^\beta, PK_n^\beta)
+% \]
+% 
+% Each node keeps their $PK$ private and shares $K_n^\alpha$ and $K_n^\beta$.
+% 
+% When all $N$ keys are received we can construct the target addresses $\alpha, \beta$.
+% \[
+% 	\alpha \equiv \prod K_n^\alpha
+% \]
+% 
+% These addresses need to be public, because they are to be monitored by each node.
+% 
+% \subsubsection{Release access keys}
+% 
+% When monitoring the two addresses, at the next tick there are two situations:
+% 
+% \begin{description}
+% \item[Succes] $\Rightarrow$ publish $\langle \crypt{K_n^\beta}_{PK_A}, \crypt{K_\alpha}_{PK_B} \rangle$
+% \item[Abort] $\Rightarrow$ publish $\langle \crypt{K_n^\alpha}_{PK_A}, \crypt{K_\beta}_{PK_B} \rangle$
+% \end{description}
+% 
+% Like before, when all $N$ keys are received we can construct the private keys and access the address $\alpha$ or $\beta$. First decode each $\crypt{K_n^\beta}_{PK_A}$ into $K_n^\beta$, then just combine
+% 
+% \[
+% 	K_\alpha \equiv \prod K_n^\alpha
+% \]
 
 
 \section{Guarantor Transactions}
