@@ -9,7 +9,7 @@
 \usepackage{fullpage}
 
 \title{Internet of Coins\\[6mm]
-\small{Hybrid Assets for Peer-to-Peer Inter-Blockchain Value Transfer}
+\small{Hybrid Assets for Peer-to-Peer Intersystemic Value Transfer}
 }
 
 \newcommand{\hyb}[1]{\ensuremath{\mathtt{ HYB }_{#1}}}
@@ -27,9 +27,9 @@
 
 \begin{center}
 \includegraphics[width=.5\textwidth]{images/internetofcoins_logo_vectorcolor2.pdf}\\[8ex]
-{\Huge Internet of Coins}\\[4ex]
-{\Large Hybrid Assets for Peer-to-Peer Inter-Blockchain Value
-Transfer}\\[4ex]
+{\Huge Internet of Coins}\\[2ex]
+{\Large Hybrid Assets for Peer-to-Peer Intersystemic Value Transfer}\\[1ex]
+{\tiny version: 1.0, date: 15.12.2014, author: Joachim de Koning }\\[4ex]
 \end{center}
 
 \begin{abstract}
@@ -38,35 +38,23 @@ Transfer}\\[4ex]
 
 \newpage
 
+
 \section{Introduction}
 
-Since the inception of Bitcoin, we have seen the rise of many digital
-cash descendants that either imitate or replicate the peer-to-peer
-version of electronic cash that Bitcoin was designed to be. Besides
-blockchain technology, decentralized asset exchanges\cite{counterparty}
-have been built to facilitate the issuing of virtual assets. Ledgerless
-\cite{opentransactions} systems have also been development, even before
-Bitcoin. While the existing solutions may function as intended,
-exchanges in value between these systems and blockchains is most often
-mediated through trusted third parties. This re-introduces the inherent
-weaknesses of the traditional trust based financial models into the
-realm of peer-to-peer digital currencies. In many cases this is no
-direct threat to the usage and trade of these currencies. Yet at the
-same time the different implementations of digital cash remain isolated
-from eachother, other than their exchange value relative to the Bitcoin.
-This exposes these currencies to price manipulation strategies that have
-the potential to drain value from these markets \cite{panture}.
+Since the inception of Bitcoin, we have seen the rise of many digital cash descendants that either imitate or replicate the peer-to-peer version of electronic cash that Bitcoin was designed to be. Besides blockchain technology, decentralized asset exchanges\cite{counterparty} have been built to facilitate the issuing of virtual assets. Ledgerless\cite{opentransactions} systems have also been in development, even before Bitcoin. While the existing solutions may function as intended, exchanges in value between these systems and blockchains is most often mediated through trusted third parties. This re-introduces the inherent weaknesses of the traditional trust based financial models into the realm of peer-to-peer digital currencies. In many cases this is no direct threat to the usage and trade of these currencies. Yet at the same time the different implementations of digital cash remain isolated from eachother, other than their exchange value being calculated relative to the Bitcoin on centralized orderbooks. This exposes these currencies to price manipulation strategies that have the potential to drain value from these markets\cite{panture}.
 
-What is needed is a hybrid asset and transfer system utilizing a modular and standardized peer-to-peer platform, to replace the trust model. A loosely coupled system\cite{EDA} allowing any two willing parties to transact assets cross-blockchain with each other, without the need for a trusted third party. Transaction methods that have no systemic boundaries and can operate cross-blockchain and inter-systemic, and may thus tie different value systems together. Through hybrid assets, loosely coupled financial systems create a cryptosphere that is immune to MITM (man-in-the-middle) intermediary control by trusted parties and stabilizes crypto-economies by enabling the value of smaller markets to be transferred into hybrid assets in the event of network destabilization. In this paper, we propose a solution to the digital economy diaspora using a peer-to-peer, distributed, inter-systemic and inter-blockchain exchange server to mediate the transfer of value between digital currency systems.
+What is needed is a hybrid asset and transfer system utilizing a modular and standardized peer-to-peer platform to replace the trust model. A loosely coupled system\cite{EDA} allowing any two willing parties to transact assets cross-blockchain with each other, without the need for a trusted third party. Transaction methods that have no systemic boundaries and can operate cross-blockchain and intersystemic, and may thus tie different value systems together. Through hybrid assets, loosely coupled financial systems create a cryptosphere that is immune to MITM (man-in-the-middle) intermediary control by trusted parties and stabilizes crypto-economies by enabling the value of smaller markets to be transferred into hybrid assets in the event of network destabilization. In this paper, we propose a solution to the digital economy diaspora using a peer-to-peer, distributed, inter-systemic and inter-blockchain exchange server to mediate the transfer of value between digital currency systems.
 
 
 \section{Inter-Blockchain Transactions}
 
-We define a hybrid asset as a blockchain-agnostic set of tokens\cite{coloredcoins} allocated on multiple digital value exchanges or multiple blockchains. The asset may gain a form of inherent value if its issuer decides to prove the asset's contextual value by either proof-of-burn\cite{proofofburn} or proof-of-stake\cite{proofofburn}. Asset holders on the hybrid network have either issued the asset themselves, or have obtained it on a decentralized asset exchange. Our proposed network daemon (hybridd) 'glues' crypto-assets and coins together by passing around datasets or tables - utilizing a FIFO (first-in-first-out) blockstream for sharing and verifying data - that contain identification information about each invidual blockchain-based asset, and rulesets that govern their relationship to form a hybrid asset. This allows for the creation of assets that have the flexibility to pass their value from blockchain to blockchain, or system to system. An owner may transfer an asset to another blockchain by cryptographically proposing a transaction to which any other peer on the hybridd network may respond. To make these kinds of transactions possible, an allocator node on the network must have allocated a certain amount of assets or coins to be used for inter-blockchain transactions. Information about allocators that hold such amounts is shared through the network, and constitutes a dynamic POA (proof-of-allocation) table for each network node.
+We define a hybrid asset as a blockchain-agnostic set of tokens\cite{coloredcoins} allocated on multiple digital value exchanges or multiple blockchains. The asset may gain a form of inherent value if its issuer decides to prove the asset's contextual value by either proof-of-burn\cite{proofofburn} or proof-of-stake\cite{proofofstake}. Asset holders on the hybrid network have either issued the asset themselves, or have obtained it on a decentralized asset exchange. Our proposed network daemon (hybridd) 'glues' crypto-assets and coins together by passing around datasets or tables - utilizing a FIFO (first-in-first-out) blockstream for sharing and verifying data - that contain identification information about each invidual blockchain-based asset, and rulesets that govern their relationship to form a hybrid asset. This allows for the creation of assets that have the flexibility to pass their value from blockchain to blockchain, or system to system. An owner may transfer an asset to another blockchain by cryptographically proposing a transaction to which any other peer on the hybridd network may respond. To make these kinds of transactions possible, an allocator node on the network must have allocated a certain amount of assets or coins to be used for inter-blockchain transactions. Information about allocators that hold such amounts is shared through the network, and constitutes a dynamic POA (proof-of-allocation) table for each network node.
 
 Communication between exchanging peers goes through an anonymous swarm of nodes that act as an escrow for the network. The nodes in this group use \haystack cryptography to ensure impartial activity as a swarm or hive. Explained in simple terms haystack works as follows. Both the allocator of a transaction (Alice) and the initiator (Bob) receive public addresses from a swarm escrow (we will call this group Cipher). Cipher makes available a multitude of public keys created by each individual member of the swarm. These keys form multisignature transaction keys\cite{multisig} when combined. For a more detailed description of this mechanism, see section 10.
 
+\begin{center}
 \includegraphics[width=.9\textwidth]{images/1-way-transaction.pdf}
+\end{center}
 
 
 \section{Meta Server}
@@ -75,16 +63,25 @@ To be able to integrate technically incompatible value models and peer-to-peer b
 
 The meta-server networking daemon (hybridd) must use a concise and practical encrypted communications protocol and functions modularly  on top of existing anonymous routing networks such as, for example, TOR\cite{tor}, I2P\cite{i2p}, or GNUnet\cite{gnunet}, using their networks as a transport. This makes it more difficult to trivially identify individual node IP addresses, and makes NAT and firewall traversal easier. Peer ID's and their public keys are shared among peers as data in a distributed hash table\cite{dht}. Each PeerID is subject to a lease, and the entries of the peertable are intermittently verified by the participants in the network and timestamped.
 
+\begin{center}
 \includegraphics[width=.9\textwidth]{images/forumimg_hybridd.pdf}
+\end{center}
 
 
 \section{Proof-of-Allocation}
 
 To make sure peers are able to determine the viability of a transaction before initiating one, we will need to use a proof-of-allocation (POA) table. To ensure the information in this table is correct, peers perform ledger auditing and verification when they have compatible active modules to access the blockchain or system on which the allocated amount is recorded. The POA table can be interpreted by individual nodes to ensure which transaction combinations are possible and viable, and which peers are eligible for transaction.
 
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/poa_table.pdf}
+\end{center}
+
 In the example you will notice there are four addresses holding the asset \stormwind, according to the POA table. Each node with access to NXT-AE (NXT) and CounterParty (XCP) blockchains is able to verify the allocated amount of assets specified in the table. By combining the information from a local database, a node can deduct that in this example the asset \stormwind has an allocation of 96,425 on the NXT blockchain and 49,500 on the XCP blockchain. The total proof-of-allocation amount would in this case be simply 145,925 units.
 
-\includegraphics[width=.5\textwidth]{images/forumimg_valuetokens.pdf}
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/forumimg_valuetokens.pdf}
+\end{center}
+
 
 \section{Network}
 
@@ -136,17 +133,15 @@ Extending into DAO territory can also be done on other platforms. This, however,
 
 \section{Value and Allocation Theory}
 
+The transfer of actual blocks between blockchains is cryptographically not feasible, because blocks blockchain generally only reference back to the blockchain itself and not an external data source. Even if it were possible, it would be cumbersome and impractical to implement, since cryptocurrency systems and other accounting systems are often incompatible. This means that value cannot be transferred between blockchains and ledgerless systems effectively, except by means of informational transfer. This mode of transfer is often seen in modern accounting, and much of the allocation methodologies therein originally stem from the early medieval system of Hawala\cite{hawala}. We must attempt to create an allocation method that is generic enough - like accounting and/or Hawala - to enable wide compatibility between diverse systems.
+
 When issuing a hybrid asset we must take into account the necessary allocation overhead to ensure the assets are liquid and transferrable to other systems and blockchains. This overhead may have the effect of inflating the price of the asset, however, as more allocators enter the market the opposite may also be true. Let's do a little contemplation on value and allocation to anticipate the effects of allocation reliance and resulting behaviour of market participants in more extreme market conditions.
 
-If part of a hybrid asset becomes scarce in the market, it could
-theoretically become subject to deflation on any of its host
-blockchains. For example: if we issue the hybrid asset APPLES on NXT-AE,
-Ethereum and Counterparty\cite{counterparty}, and are looking to ensure
-at least $30\%$ allocation, we need enough incentive for participants in
-the network to allocate such an amount. The incentive is nominally
-provided by the maximum percentual cost of conversion by the asset
-issuer, and -- in most cases -- provides enough allocators for
-cross-blockchain liquidity, because of the incentive mechanism.
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/allocation.pdf}
+\end{center}
+
+If part of a hybrid asset becomes scarce in the market, it could theoretically become subject to deflation on any of its host blockchains. For example: if we issue the hybrid asset APPLES on NXT-AE, Ethereum and Counterparty, and are looking to ensure at least $30\%$ allocation, we need enough incentive for participants in the network to allocate such an amount. The incentive is nominally provided by the maximum percentual cost of conversion by the asset issuer, and -- in most cases -- provides enough allocators for cross-blockchain liquidity, because of the incentive mechanism.
 
 As long as prices on separate blockchains remain tied to common market ranges, allocations should autonomously balance out because of the effect of demand and supply in the markets. However, if for some reason many holders of a hybrid asset choose to exit one of the individual host platforms and flee into another, this may create an imbalance in price for the asset between chains. Also the mass-abandonment of a host platform by users could effectively cause the perceived value of the asset on that specific platform to become unstable. In such extreme circumstances allocation resources could be exhausted.
 
@@ -272,7 +267,7 @@ By using multisignature transactions as a cryptographically secure method, advan
 
 \section{References}
 
-\bibliographystyle{plain}
+\bibliographystyle{ieeetr}
 \bibliography{internetofcoins}{}
 
 \end{document}
