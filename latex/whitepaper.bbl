@@ -1,0 +1,53 @@
+\begin{thebibliography}{10}
+
+\bibitem{counterparty}
+``Counterparty.'' \url{http://www.devtome.com/doku.php?id=counterparty}.
+
+\bibitem{opentransactions}
+``Opentransactions.''
+  \url{http://opentransactions.org/wiki/index.php?title=About}, 2014.
+
+\bibitem{panture}
+``Only bitcoin will survive.''
+  \url{http://www.panture.com/only-bitcoin-will-survive/}, 2014.
+
+\bibitem{EDA}
+``How eda extends soa and why it is important.''
+  \url{http://soa-eda.blogspot.nl/2006/11/how-eda-extends-soa-and-why-it-is.html},
+  2006.
+
+\bibitem{coloredcoins}
+``What are coloredcoins?.''
+  \url{http://coloredcoins.org/about/what-are-coloredcoins/}.
+
+\bibitem{proofofburn}
+``Proof of burn.'' \url{https://en.bitcoin.it/wiki/Proof_of_burn}.
+
+\bibitem{proofofstake}
+``What proof of stake is and why it matters.''
+  \url{http://bitcoinmagazine.com/6528/}, 2013.
+
+\bibitem{multisig}
+``Multisig: The future of bitcoin.''
+  \url{http://bitcoinmagazine.com/11108/multisig-future-bitcoin}, 2014.
+
+\bibitem{tor}
+``Tor project: Anonymity online.'' \url{https://www.torproject.org/}.
+
+\bibitem{i2p}
+``The invisible internet project.'' \url{https://geti2p.net/en/}.
+
+\bibitem{gnunet}
+``Gnu's framework for secure and peer-to-peer networking.''
+  \url{https://gnunet.org/}.
+
+\bibitem{dht}
+``Distributed hash table.''
+  \url{https://en.wikipedia.org/wiki/Distributed_hash_table}.
+
+\bibitem{hawala}
+``Informal funds transfer systems: An analysis of the hawala system.''
+  \url{http://www.johnfwilson.net/resources/Hawala+Occasional+Paper+_3.24.03_.pdf},
+  2003.
+
+\end{thebibliography}
