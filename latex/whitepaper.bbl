@@ -45,6 +45,10 @@
 ``Distributed Hash Table''
   \url{https://en.wikipedia.org/wiki/Distributed_hash_table}.
 
+\bibitem{selfdestruct}
+``On the Longest Chain Rule and Programmed Self-Destruction of Crypto
+  Currencies'' \url{http://arxiv.org/abs/1405.0534}, 2014.
+
 \bibitem{hawala}
 ``Informal Funds Transfer Systems: An Analysis of the Hawala System''
   \url{http://www.johnfwilson.net/resources/Hawala+Occasional+Paper+_3.24.03_.pdf},
